@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proxy Configuration Result</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #36454F;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        p {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            margin: 20px auto;
+            width: 200px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Proxy Configuration Result</h1>
+    {% if current_config %}
+    <p>Domain: {{ current_config.domain }}</p>
+    <p>Loading from IP Address: {{ current_config.ip }}</p>
+    <p>Temporary URL: {{ current_config.subdomain }}</p>
+    <a href="http://{{ current_config.subdomain }}:80" target="_blank" rel="noopener noreferrer">Open in Browser</a>
+    {% endif %}
+
+    <!-- Server time display -->
+    <div id="serverTime"></div>
+
+    <script>
+        // Function to update and display the server time
+        function updateServerTime() {
+            const serverTimeElement = document.getElementById('serverTime');
+
+            function formatTime(date) {
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const seconds = String(date.getSeconds()).padStart(2, '0');
+                return `${hours}:${minutes}:${seconds}`;
+            }
+
+            function checkDnsRemoved() {
+                const currentTime = new Date();
+                const currentMinutes = currentTime.getMinutes();
+
+                // Check if the DNS removal time (e.g., 5 minutes) has passed
+                if (currentMinutes % 5 === 0) {
+                    alert('DNS removed!');
+                }
+            }
+
+            // Update the server time every second
+            setInterval(function () {
+                const currentTime = new Date();
+                serverTimeElement.textContent = `Server Time: ${formatTime(currentTime)}`;
+                checkDnsRemoved();
+            }, 1000);
+        }
+
+        // Call the updateServerTime function when the page loads
+        window.onload = updateServerTime;
+    </script>
+</body>
+</html>

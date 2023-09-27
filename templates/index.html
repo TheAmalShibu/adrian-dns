@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Website Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #36454F;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 24px; /* Set the font size to make it big */
+            color: #007BFF; /* Set the color to blue */
+	    font-weight: bold;
+        }
+
+        .designer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #ffffff;
+	    font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+	<h1>Website Viewer</h1>
+    <form method="post" action="/configure-proxy">
+        <label for="domain">Enter URL:</label>
+        <input type="text" id="domain" name="domain" required><br><br>
+        <label for="ip">Enter IP Address:</label>
+        <input type="text" id="ip" name="ip" required><br><br>
+	    <label for="port">Enter Port:</label>
+        <input type="text" id="port" name="port" placeholder="Leave empty for default"><br><br>
+        <button type="submit">Load DNS</button>
+    </form>
+    <p>This website is in Beta testing phase</p>
+    <p>The temp URL is set to expire in 5 minutes. Please don't create the same domain to different IP inside 5 minutes</p>
+    <p>Remove any "/" character from the end of URL</p>
+    <div class="designer">Created by Adrian</div>
+</body>
+</html>
+

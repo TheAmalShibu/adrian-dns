@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proxy Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-top: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Proxy Configuration</h1>
+    <form method="post" action="/configure-proxy">
+        <label for="domain">Domain:</label>
+        <input type="text" id="domain" name="domain" required><br><br>
+        <label for="ip">IP Address:</label>
+        <input type="text" id="ip" name="ip" required><br><br>
+        <button type="submit">Configure Proxy</button>
+    </form>
+    {% if current_config %}
+    <p>Current Configuration:</p>
+    <p>Domain: {{ current_config.domain }}</p>
+    <p>IP Address: {{ current_config.ip }}</p>
+    <p>Subdomain: {{ current_config.subdomain }}</p>
+    <a href="http://{{ current_config.subdomain }}" target="_blank" rel="noopener noreferrer">Open in Browser</a>
+    {% endif %}
+</body>
+</html>
+

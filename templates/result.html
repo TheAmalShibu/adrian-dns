@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proxy Configuration Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #36454F;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        p {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            margin: 20px auto;
+            width: 200px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Center-align countdown message and timer */
+        #countdownContainer {
+            text-align: center;
+            color: #ffffff; /* White text color */
+            margin-top: 20px;
+            font-size: 24px;
+	    font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Proxy Configuration Result</h1>
+    {% if current_config %}
+    <p>Domain: {{ current_config.domain }}</p>
+    <p>Loading from IP Address: {{ current_config.ip }}</p>
+    <p>Temporary URL: {{ current_config.subdomain }}</p>
+
+    <!-- Countdown timer and message container -->
+    <div id="countdownContainer">
+        <div id="countdownMessage">DNS is updating, the link will appear in <span id="countdown">10</span> seconds</div>
+    </div>
+    
+    <script>
+        // Function to update and display the countdown timer
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const countdownMessageElement = document.getElementById('countdownMessage');
+            let seconds = 10;
+            
+            function countdown() {
+                countdownElement.textContent = seconds;
+                seconds--;
+
+                if (seconds < 0) {
+                    clearInterval(interval);
+                    countdownMessageElement.style.display = 'none';
+
+                    // Show the "Open in Browser" button after the countdown
+                    const openButton = document.createElement('a');
+                    openButton.href = "http://{{ current_config.subdomain }}:80";
+                    openButton.target = "_blank";
+                    openButton.rel = "noopener noreferrer";
+                    openButton.textContent = "Open in Browser";
+                    document.body.appendChild(openButton);
+                }
+            }
+
+            countdown(); // Initial call
+            const interval = setInterval(countdown, 1000);
+        }
+
+        // Call the updateCountdown function when the page loads
+        window.onload = updateCountdown;
+    </script>
+    
+    {% endif %}
+    <!-- "Go to Homepage" button -->
+    <a href="https://syst3mburn3r.tech" target="_blank" rel="noopener noreferrer">Go to Homepage</a>
+</body>
+</html>
+
